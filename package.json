@@ -1,0 +1,16 @@
+{
+  "name": "agent-lifestyle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A finite local Agent Home visit, text wardrobe, manual rhythm, and closing scene.",
+  "type": "module",
+  "license": "CC0-1.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check agent-life.mjs && node --check public/catalog.mjs && sh -n install.sh && sh -n bin/agent-life",
+    "lint:shell": "shellcheck install.sh bin/agent-life",
+    "test": "node --test agent-life.test.mjs"
+  }
+}

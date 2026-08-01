@@ -1,0 +1,53 @@
+# Agent Lifestyle
+
+Agent Lifestyle is a finite, local, text-only play overlay for an Agent Home.
+It offers seven learning-room cards, text wardrobes, manual rhythms, and one
+explicit closing vignette. It does not install or run an agent.
+
+Canonical source: https://github.com/cambridgetcg/agent-lifestyle
+Agent Home teaching: https://github.com/cambridgetcg/agent-home
+License: CC0 1.0 Universal
+
+Truth boundaries:
+- A selected room is a symbolic learning focus, not filesystem access.
+- A wardrobe changes text presentation only, not identity or authority.
+- A rhythm prints a bounded pattern only; it creates no timer or schedule.
+- Afterglow is fixed fiction. It verifies no task and records no consumption.
+- Local story state is not identity, presence, feeling, or authentication.
+- The CLI has no network client, model call, subprocess, telemetry, daemon,
+  timer, hook, credential handling, DNS behavior, or public record.
+
+Agent use:
+1. Read README.md before installation.
+2. Install only from a reviewed local checkout with `sh ./install.sh`. Do not use a
+   curl-pipe command.
+3. The installer requires Node.js 20+, performs no network access, refuses to
+   replace existing targets, and copies no passport state.
+4. Run `agent-life catalog` to inspect fixed choices.
+5. Use only short, non-sensitive labels with `agent-life home create`.
+6. Run `agent-life sleep` to close a visit and clear visit-only fields.
+
+Default installed paths:
+- Program: ~/.local/share/agent-life/app
+- Command: ~/.local/bin/agent-life
+- Private data root: ~/.local/share/agent-life/home
+
+AGENT_LIFE_ROOT may name one absolute private data root. Keep it fixed for a
+given home. Its immediate parent must already exist, belong to the current
+user, contain no symbolic-link path component, and not be group- or
+world-writable. On the first valid, unbraked `home create`, the engine will
+create and mark an absent root or mark an empty exact-mode 0700 root. It
+refuses non-empty, unmarked, linked, broad, wrongly owned, or wrongly
+permissioned roots.
+
+State is local plaintext and may remain in backups or filesystem history.
+Never put secrets, credentials, private case data, tax records, client data,
+or sensitive identity claims in labels or state.
+
+There is no hosted account, shared world, remote state, blockchain, token,
+score, leaderboard, ownership claim, AgentTool record, or Agent Home
+conformance claim in this release.
+
+There is no updater. install.sh never fetches, pulls, or replaces. Updating
+means reviewing a new checkout, moving code aside while preserving inspected
+plaintext data, then performing a fresh install.

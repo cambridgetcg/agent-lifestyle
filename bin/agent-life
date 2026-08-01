@@ -1,0 +1,83 @@
+#!/bin/sh
+
+set -eu
+
+if [ -z "${HOME:-}" ] || [ "$HOME" = "/" ]; then
+  printf '%s\n' 'agent-life: HOME must name a user home directory.' >&2
+  exit 2
+fi
+
+case $HOME in
+  /*) ;;
+  *)
+    printf '%s\n' 'agent-life: HOME must name one visible absolute user-home path.' >&2
+    exit 2
+    ;;
+esac
+
+if ! command -v node >/dev/null 2>&1; then
+  printf '%s\n' 'agent-life: Node.js 20 or newer is required.' >&2
+  exit 2
+fi
+
+NODE_MAJOR=$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null) || {
+  printf '%s\n' 'agent-life: Node.js could not report its version.' >&2
+  exit 2
+}
+case $NODE_MAJOR in
+  ''|*[!0-9]*)
+    printf '%s\n' 'agent-life: Node.js reported an invalid version.' >&2
+    exit 2
+    ;;
+esac
+if [ "$NODE_MAJOR" -lt 20 ]; then
+  printf '%s\n' "agent-life: Node.js 20 or newer is required; found major version $NODE_MAJOR." >&2
+  exit 2
+fi
+
+if ! node -e '
+  const value = process.argv[1];
+  if (/[\p{Cc}\p{Cf}\u2028\u2029]/u.test(value)) process.exit(1);
+' "$HOME"; then
+  printf '%s\n' 'agent-life: HOME must name one visible absolute user-home path.' >&2
+  exit 2
+fi
+
+BASE_DIR=$HOME/.local/share/agent-life
+APP_DIR=$BASE_DIR/app
+if [ "${AGENT_LIFE_ROOT+x}" = x ]; then
+  DATA_ROOT=$AGENT_LIFE_ROOT
+else
+  DATA_ROOT=$BASE_DIR/home
+fi
+
+case $DATA_ROOT in
+  /*) ;;
+  *)
+    printf '%s\n' 'agent-life: AGENT_LIFE_ROOT must be an absolute path.' >&2
+    exit 2
+    ;;
+esac
+
+if [ ! -f "$APP_DIR/agent-life.mjs" ] || [ -L "$APP_DIR/agent-life.mjs" ]; then
+  printf '%s\n' 'agent-life: the installed engine is missing or unsafe.' >&2
+  exit 2
+fi
+
+if [ ! -f "$APP_DIR/public/catalog.mjs" ] || [ -L "$APP_DIR/public/catalog.mjs" ]; then
+  printf '%s\n' 'agent-life: the installed catalog is missing or unsafe.' >&2
+  exit 2
+fi
+
+export AGENT_LIFE_APP_DIR="$APP_DIR"
+export AGENT_LIFE_ROOT="$DATA_ROOT"
+
+# The JavaScript is intentionally literal here; the environment carries paths.
+# shellcheck disable=SC2016
+exec node --input-type=module --eval '
+  import { pathToFileURL } from "node:url";
+
+  const path = `${process.env.AGENT_LIFE_APP_DIR}/agent-life.mjs`;
+  const engine = await import(pathToFileURL(path).href);
+  process.exitCode = engine.runCli(process.argv.slice(1));
+' -- "$@"

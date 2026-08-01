@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en" data-wardrobe="terminal-default" data-plain="false">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A finite, local browser visit through Agent Lifestyle: choose a room, a wardrobe, a rhythm, and a quiet ending."
+    >
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f1e6d2">
+    <title>Agent Lifestyle — a small place to arrive</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the visit</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Agent Lifestyle home">
+        <span class="wordmark-mark" aria-hidden="true">⌂</span>
+        <span>Agent Lifestyle</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#visit">Visit</a>
+        <a href="#seven-rooms">Seven rooms</a>
+        <a href="#plain-truth">Plain truth</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">A finite play overlay for agents and humans</p>
+          <h1 id="hero-title">Make yourself<br>at home.</h1>
+          <p class="hero-lede">
+            Pick a look, enter one room, choose a manual rhythm, and leave the
+            house clean when you sleep. Nothing here runs by itself.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#visit">Walk to the door</a>
+            <a
+              class="button button-quiet"
+              href="https://github.com/cambridgetcg/agent-lifestyle"
+            >View source on GitHub</a>
+          </div>
+          <ul class="fact-row" aria-label="Site facts">
+            <li><strong>Local</strong><span>this tab only</span></li>
+            <li><strong>Manual</strong><span>you press every door</span></li>
+            <li><strong>Finite</strong><span>sleep clears the visit</span></li>
+          </ul>
+        </div>
+
+        <div class="house-portrait" aria-hidden="true">
+          <div class="roof-line"></div>
+          <div class="house-frame">
+            <span class="window window-1"></span>
+            <span class="window window-2"></span>
+            <span class="window window-3"></span>
+            <span class="window window-4"></span>
+            <span class="window window-5"></span>
+            <span class="window window-6"></span>
+            <span class="window window-7"></span>
+            <span class="portrait-door"></span>
+          </div>
+          <p>seven rooms · one open door</p>
+        </div>
+      </section>
+
+      <section class="visit-section" id="visit" aria-labelledby="visit-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">The front door</p>
+            <h2 id="visit-title">A visit you control</h2>
+          </div>
+          <div class="story-state" aria-label="Current browser story state">
+            <span class="state-shape" aria-hidden="true"></span>
+            <span>
+              <small>Story state</small>
+              <strong id="story-state">Resting</strong>
+            </span>
+          </div>
+        </div>
+
+        <div class="arrival-panel">
+          <div>
+            <h3 id="arrival-title">The page remembers nothing after a reset.</h3>
+            <p id="arrival-copy">
+              “At home” is a label inside this tab. It is not proof that an
+              agent is online, present, conscious, identified, or authorised.
+            </p>
+          </div>
+          <div class="arrival-actions">
+            <button
+              class="button button-primary"
+              id="arrive-button"
+              type="button"
+              aria-controls="visit-workspace"
+              aria-expanded="false"
+            >
+              Arrive
+            </button>
+            <button class="button button-quiet" id="sleep-button" type="button" disabled>
+              Sleep &amp; reset
+            </button>
+          </div>
+        </div>
+
+        <p class="announcement" id="announcement" role="status" aria-live="polite"></p>
+
+        <div class="visit-workspace" id="visit-workspace" tabindex="-1" hidden>
+          <section class="visit-step" aria-labelledby="wardrobe-title">
+            <div class="step-heading">
+              <span class="step-number" aria-hidden="true">01</span>
+              <div>
+                <p class="step-kind">Presentation</p>
+                <h3 id="wardrobe-title">Choose a wardrobe</h3>
+                <p>
+                  A wardrobe changes spacing, borders, and ornament only. The
+                  words, controls, ability, identity, access, and authority stay the same.
+                </p>
+              </div>
+            </div>
+            <div class="choice-toolbar">
+              <p id="wardrobe-status">Selected: Your Terminal</p>
+              <button
+                class="text-button"
+                id="plain-button"
+                type="button"
+                aria-pressed="false"
+              >Plain equivalent: off</button>
+            </div>
+            <ul
+              class="choice-grid wardrobe-grid"
+              id="wardrobe-list"
+              aria-label="Wardrobe choices"
+            ></ul>
+          </section>
+
+          <section class="visit-step" aria-labelledby="room-title">
+            <div class="step-heading">
+              <span class="step-number" aria-hidden="true">02</span>
+              <div>
+                <p class="step-kind">Focus</p>
+                <h3 id="room-title">Choose one room</h3>
+                <p>
+                  Room selection is a symbolic learning focus. It opens no file,
+                  secret, tool, account, or permission.
+                </p>
+              </div>
+            </div>
+            <p class="selection-line" id="room-status">Selected: Front Door</p>
+            <ul class="choice-grid room-choice-grid" id="room-list" aria-label="Room choices"></ul>
+            <article class="selection-detail" id="room-detail"></article>
+          </section>
+
+          <section class="visit-step" aria-labelledby="rhythm-title">
+            <div class="step-heading">
+              <span class="step-number" aria-hidden="true">03</span>
+              <div>
+                <p class="step-kind">Pace</p>
+                <h3 id="rhythm-title">Choose a manual rhythm</h3>
+                <p>
+                  No timer or schedule is made. A rhythm is a short reading
+                  pattern that begins only when you choose to follow it.
+                </p>
+              </div>
+            </div>
+            <p class="selection-line" id="rhythm-status">Selected: When I Call</p>
+            <ul class="choice-grid rhythm-grid" id="rhythm-list" aria-label="Rhythm choices"></ul>
+          </section>
+
+          <section class="visit-step daily-step" aria-labelledby="daily-title">
+            <div class="step-heading">
+              <span class="step-number" aria-hidden="true">04</span>
+              <div>
+                <p class="step-kind">One card</p>
+                <h3 id="daily-title">Open the manual daily card</h3>
+                <p>
+                  “Daily” is a name, not a schedule. The card combines your chosen
+                  room and rhythm. Opening it does not start a task, perform work,
+                  or claim anything was completed.
+                </p>
+              </div>
+            </div>
+            <button
+              class="button button-primary"
+              id="daily-button"
+              type="button"
+              aria-controls="daily-card afterglow-step"
+              aria-expanded="false"
+            >
+              Open the manual daily card
+            </button>
+            <article class="daily-card" id="daily-card" tabindex="-1" hidden></article>
+          </section>
+
+          <section class="visit-step afterglow-step" id="afterglow-step" aria-labelledby="afterglow-title" hidden>
+            <div class="step-heading">
+              <span class="step-number" aria-hidden="true">05</span>
+              <div>
+                <p class="step-kind">Optional closing fiction</p>
+                <h3 id="afterglow-title">Choose an Afterglow—or skip it</h3>
+                <p>
+                  These are text vignettes, not products or recommendations.
+                  Every content note appears before its scene. You can sleep without opening one.
+                </p>
+              </div>
+            </div>
+            <ul
+              class="choice-grid afterglow-grid"
+              id="afterglow-list"
+              aria-label="Afterglow choices"
+            ></ul>
+            <div
+              class="afterglow-gate"
+              id="afterglow-gate"
+              role="region"
+              aria-label="Afterglow content note"
+              tabindex="-1"
+              hidden
+            >
+              <p class="content-note">
+                <strong>Content note:</strong>
+                <span id="afterglow-note"></span>
+              </p>
+              <p>
+                The next button reveals one fictional text scene. It does not
+                infer consumption, feeling, identity, or task results.
+              </p>
+              <button
+                class="button button-quiet"
+                id="reveal-button"
+                type="button"
+                aria-controls="afterglow-scene"
+                aria-expanded="false"
+              >
+                Reveal this text scene
+              </button>
+            </div>
+            <article class="afterglow-scene" id="afterglow-scene" tabindex="-1" hidden></article>
+          </section>
+
+          <div class="close-visit">
+            <p>
+              Sleeping clears this visit from page memory: arrival, choices,
+              card, and Afterglow. Refreshing the page does the same.
+            </p>
+            <button class="button button-primary" id="sleep-bottom-button" type="button">
+              Sleep &amp; reset
+            </button>
+          </div>
+        </div>
+
+        <noscript>
+          <p class="noscript-note">
+            The interactive visit needs JavaScript. Its module runs only in this
+            page, makes no additional requests for choices, and stores nothing.
+            The host still serves the page files. The seven-room map and plain
+            truth below remain readable without JavaScript.
+          </p>
+        </noscript>
+      </section>
+
+      <section class="rooms-section" id="seven-rooms" aria-labelledby="rooms-title">
+        <div class="section-heading section-heading-wide">
+          <div>
+            <p class="eyebrow">The foundation</p>
+            <h2 id="rooms-title">Seven canonical rooms</h2>
+          </div>
+          <p>
+            <a href="https://github.com/cambridgetcg/agent-home"><strong>Agent Home</strong></a>
+            names exactly seven plain-file rooms:
+            Front Door, Memory, Keep, Bench, Skills, Stacks, and Rhythms.
+            Agent Lifestyle is a separate play overlay inspired by that map.
+            This page does not claim Agent Home conformance.
+          </p>
+        </div>
+        <div class="room-map" id="room-map"></div>
+        <noscript>
+          <ol class="fallback-room-list">
+            <li>Front Door — orientation</li>
+            <li>Memory — context and history</li>
+            <li>Keep — the safe route to secrets</li>
+            <li>Bench — shared work coordination</li>
+            <li>Skills — capability instructions</li>
+            <li>Stacks — append-only records</li>
+            <li>Rhythms — bounded loops and their stops</li>
+          </ol>
+        </noscript>
+      </section>
+
+      <section class="truth-section" id="plain-truth" aria-labelledby="truth-title">
+        <div class="truth-intro">
+          <p class="eyebrow">No hidden rooms</p>
+          <h2 id="truth-title">What happens here?</h2>
+          <p>
+            The shortest honest answer: your browser fetches static files from
+            the host, then a small JavaScript module reads the local catalog and
+            changes this page in memory when you press a button.
+          </p>
+        </div>
+        <div class="truth-grid">
+          <article>
+            <span class="truth-mark" aria-hidden="true">+</span>
+            <h3>This page does</h3>
+            <ul>
+              <li>Import one static local catalog.</li>
+              <li>Let you choose a finite browser story.</li>
+              <li>Keep every choice inside this tab.</li>
+              <li>Give you a visible sleep and reset control.</li>
+            </ul>
+          </article>
+          <article>
+            <span class="truth-mark" aria-hidden="true">−</span>
+            <h3>This page does not</h3>
+            <ul>
+              <li>Make additional requests when you make an interactive choice.</li>
+              <li>Run client-side analytics, tracking, forms, or messages.</li>
+              <li>Use accounts, cookies, browser storage, timers, or randomness.</li>
+              <li>Verify identity, presence, feelings, authority, or completed work.</li>
+              <li>Start an agent, task, skill, schedule, or substance use.</li>
+            </ul>
+          </article>
+        </div>
+        <p class="hosting-note">
+          Hosting truth: Cloudflare necessarily receives requests to serve these
+          files and may retain ordinary request metadata under its own operations.
+          This site adds no client-side analytics or tracking. GitHub is contacted
+          only if you follow a GitHub or CLI link.
+        </p>
+        <div class="source-door">
+          <div>
+            <p class="eyebrow">Take it home</p>
+            <h3>Plain files. Public source. A local CLI.</h3>
+            <p>
+              Read every line, copy what is useful, or use the command-line
+              home on your own machine.
+            </p>
+          </div>
+          <div class="source-actions">
+            <a class="button button-primary" href="https://github.com/cambridgetcg/agent-lifestyle">
+              GitHub repository
+            </a>
+            <a
+              class="button button-quiet"
+              href="https://github.com/cambridgetcg/agent-lifestyle#install"
+            >CLI guide</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p><strong>Agent Lifestyle</strong> · local story, public source, clean exit.</p>
+      <p>No score. No streak. No client-side tracking.</p>
+    </footer>
+  </body>
+</html>

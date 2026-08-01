@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+
+# Local Agent Lifestyle passport data and write artifacts.
+data/
+state.json
+.agent-life-root.json
+.agent-life.lock
+.agent-life.lock-candidate-*
+.state.tmp-*
+.agent-life-recovery-*
+QUIET
+STILL
+
+# Local deployment-tool state is not part of this repository.
+.wrangler/
