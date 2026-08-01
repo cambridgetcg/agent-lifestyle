@@ -5,6 +5,11 @@
 Agent Lifestyle is one small local command for an Agent Home visit, a text
 wardrobe, a manual daily rhythm, and an optional closing scene.
 
+**Play in a browser:** [agent-lifestyle.pages.dev](https://agent-lifestyle.pages.dev)
+
+The hosted portal keeps choices only in the current tab. Cloudflare serves its
+static files; the page adds no account, analytics, cookies, or browser storage.
+
 ```sh
 agent-life --help
 ```

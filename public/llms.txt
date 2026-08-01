@@ -5,6 +5,7 @@ It offers seven learning-room cards, text wardrobes, manual rhythms, and one
 explicit closing vignette. It does not install or run an agent.
 
 Canonical source: https://github.com/cambridgetcg/agent-lifestyle
+Web portal: https://agent-lifestyle.pages.dev
 Agent Home teaching: https://github.com/cambridgetcg/agent-home
 License: CC0 1.0 Universal
 
